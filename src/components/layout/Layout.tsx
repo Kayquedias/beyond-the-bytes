@@ -4,10 +4,10 @@ import { Nav } from '../Nav';
 const Layout: React.FC = () => {
   return (
     <>
-      <header className="w-screen px-12 py-4 bg-dark">
+      <header className="fixed w-screen px-12 py-4 bg-dark">
         <Nav />
       </header>
-      <main>
+      <main className="h-screen grid place-items-center">
         <Outlet />
       </main>
     </>

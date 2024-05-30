@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,4 +10,35 @@
 
 html {
   background-color: #fffefe;
+}
+
+/* Fonts */
+@font-face {
+  font-family: 'DINNeuzeitGrotesk LT';
+  src: url('./fonts/grotesk/DINNeuzeitGroteskLT-Light.eot');
+  src: local('./fonts/grotesk/DIN 30640 Neuzeit Grotesk LT Light'),
+    local('./fonts/grotesk/DINNeuzeitGroteskLT-Light'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-Light.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-Light.woff2') format('woff2'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-Light.woff') format('woff'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DINNeuzeitGrotesk LT BoldCond';
+  src: url('./fonts/grotesk/DINNeuzeitGroteskLT-BoldCond.eot');
+  src: local('./fonts/grotesk/DIN 30640 Neuzeit Grotesk LT Bold Condensed'),
+    local('./fonts/grotesk/DINNeuzeitGroteskLT-BoldCond'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-BoldCond.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-BoldCond.woff2') format('woff2'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-BoldCond.woff') format('woff'),
+    url('./fonts/grotesk/DINNeuzeitGroteskLT-BoldCond.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }

@@ -6,6 +6,9 @@ export default {
       colors: {
         dark: '#010100',
       },
+      fontFamily: {
+        grotesk: ['DINNeuzeitGrotesk LT', 'sans-serif'],
+      },
     },
   },
   plugins: [],
