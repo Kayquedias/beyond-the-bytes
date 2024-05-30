@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: ['./**/**/*.tsx', './**/*.tsx'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        dark: '#010100',
+      },
+    },
   },
   plugins: [],
-}
-
+};
