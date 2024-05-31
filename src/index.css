@@ -10,6 +10,7 @@
 
 html {
   background-color: #fffefe;
+  overflow-x: hidden;
 }
 
 /* Fonts */
