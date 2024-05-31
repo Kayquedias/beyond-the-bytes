@@ -8,9 +8,9 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 import PlusIcon from '../../assets/plus.png';
+import EditIcon from '../../assets/edit.png';
 
 type ListAddressProps = {
   data: { id: string; image: string }[];
@@ -44,7 +44,7 @@ const ListAddress: React.FC<ListAddressProps> = ({ data, setIsRegister }) => {
         {data.map((item) => {
           return (
             <Card
-              className="gap-5 relative"
+              className="gap-5 group relative"
               rounded={0}
               shadow={0}
               w={'full'}
@@ -68,7 +68,16 @@ const ListAddress: React.FC<ListAddressProps> = ({ data, setIsRegister }) => {
                 <span>#{item.id}</span>
               </Center>
 
-              <motion.span></motion.span>
+              <Link
+                to={`/address/${item.id}`}
+                className="group/span opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                <img
+                  src={EditIcon}
+                  alt=""
+                  className="w-10 p-2 bg-white/75 absolute right-2 top-2 group-hover/span:bg-white transition-all duration-300"
+                />
+              </Link>
             </Card>
           );
         })}

@@ -1,7 +1,9 @@
 import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Field, FieldProps, Form, Formik, FormikHelpers } from 'formik';
 import {
+  Center,
+  Container,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -14,23 +16,22 @@ import {
 
 import { Button } from '../../components/Button';
 import { addressSchema } from '../../schemas/address';
-import { addAddress } from '../../data/addAddress';
+import { editAddress } from '../../data/editAddress';
 
 interface FormValues {
   id: string;
 }
-interface OutletContext {
-  setIsRegister: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const FormAddress: React.FC = () => {
-  const { setIsRegister } = useOutletContext<OutletContext>();
+const EditAddress: React.FC = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleSubmit = (
     values: FormValues,
     action: FormikHelpers<FormValues>
   ) => {
-    const result = addAddress(values);
+    if (!id) return;
+    const result = editAddress(id, values);
 
     if (!result) {
       action.setSubmitting(false);
@@ -38,27 +39,32 @@ const FormAddress: React.FC = () => {
     }
 
     action.setSubmitting(false);
-    setIsRegister(false);
+    navigate('/address');
   };
 
   return (
-    <>
+    <Container
+      centerContent
+      maxWidth={{ base: '32rem', md: '48rem', lg: '60rem' }}
+      className="space-y-10 my-20 sm:mt-0 w-full"
+    >
       <Heading
         as="h3"
         size="2xl"
         w={'max-content'}
         mb={5}
         fontFamily={'DINNeuzeitGrotesk LT'}
-        className="uppercase font-normal tracking-wider"
+        className="uppercase font-normal tracking-wider mt-28"
       >
-        Endereço
+        Edição de endereço <br />
+        <Center className="mt-2">#{id}</Center>
       </Heading>
       <Text
         fontFamily={'DINNeuzeitGrotesk LT'}
         textColor={'gray.400'}
         style={{ fontWeight: 100 }}
       >
-        Por favor, preencha a informação abaixo
+        Preencha o campo abaixo para alterar o ID de endereço
       </Text>
 
       <Formik
@@ -69,7 +75,7 @@ const FormAddress: React.FC = () => {
         onSubmit={handleSubmit}
       >
         {(props) => (
-          <Form className="space-y-5 w-full max-w-[330px] sm:max-w-lg">
+          <Form className="space-y-5 w-full max-w-lg">
             <Field name="id" className="space-y-5">
               {({ field, form }: FieldProps) => (
                 <FormControl
@@ -99,14 +105,15 @@ const FormAddress: React.FC = () => {
             </Field>
 
             <Flex flexDir={'column'} gap={1}>
-              <Button type="submit" isLoading={props.isSubmitting} className="">
+              <Button type="submit" isLoading={props.isSubmitting}>
                 <span />
-                Criar endereço
+                Enviar
               </Button>
+
               <Button
                 type="button"
                 background="secondary"
-                onClick={() => setIsRegister(false)}
+                onClick={() => navigate('/address')}
               >
                 <span />
                 Voltar
@@ -115,8 +122,8 @@ const FormAddress: React.FC = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </Container>
   );
 };
 
-export { FormAddress };
+export { EditAddress };
