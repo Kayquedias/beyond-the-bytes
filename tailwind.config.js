@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         dark: '#010100',
+        card: '#ececf0',
       },
       fontFamily: {
         grotesk: ['DINNeuzeitGrotesk LT', 'sans-serif'],

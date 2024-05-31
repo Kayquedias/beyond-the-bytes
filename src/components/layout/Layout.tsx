@@ -7,7 +7,7 @@ const Layout: React.FC = () => {
       <header className="fixed w-screen px-12 py-4 bg-dark">
         <Nav />
       </header>
-      <main className="h-screen grid place-items-center w-screen px-4">
+      <main className="h-screen grid place-items-center w-screen">
         <Outlet />
       </main>
     </>
