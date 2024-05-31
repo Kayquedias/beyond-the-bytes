@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Field, FieldProps, Form, Formik, FormikHelpers } from 'formik';
 import {
+  Flex,
   FormControl,
   FormErrorMessage,
   FormHelperText,
@@ -99,14 +100,20 @@ const FormAddress: React.FC = () => {
               )}
             </Field>
 
-            <Button
-              type="submit"
-              isLoading={props.isSubmitting}
-              className="uppercase py-2.5 px-5 w-full bg-dark text-white font-grotesk transition-colors duration-400 border tracking-widest hover:border-dark hover:text-dark hover:bg-white"
-            >
-              <span />
-              Criar endereço
-            </Button>
+            <Flex flexDir={'column'} gap={1}>
+              <Button type="submit" isLoading={props.isSubmitting} className="">
+                <span />
+                Criar endereço
+              </Button>
+              <Button
+                type="button"
+                background="secondary"
+                onClick={() => navigate('/address')}
+              >
+                <span />
+                Voltar
+              </Button>
+            </Flex>
           </Form>
         )}
       </Formik>
