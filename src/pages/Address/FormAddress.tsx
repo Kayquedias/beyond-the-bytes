@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Field, FieldProps, Form, Formik, FormikHelpers } from 'formik';
 import {
   FormControl,
@@ -12,19 +13,33 @@ import {
 
 import { Button } from '../../components/Button';
 import { addressSchema } from '../../schemas/address';
+import { addAddress } from '../../data/addAddress';
 
 interface FormValues {
   id: string;
 }
+interface OutletContext {
+  setIsRegister: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const FormAddress: React.FC = () => {
+  const navigate = useNavigate();
+  const { setIsRegister } = useOutletContext<OutletContext>();
+
   const handleSubmit = (
     values: FormValues,
     action: FormikHelpers<FormValues>
   ) => {
-    console.log(values);
+    const result = addAddress(values);
 
-    setTimeout(() => action.setSubmitting(false), 1000);
+    if (!result) {
+      action.setSubmitting(false);
+      return;
+    }
+
+    action.setSubmitting(false);
+    setIsRegister(false);
+    navigate('/address');
   };
 
   return (
@@ -55,7 +70,7 @@ const FormAddress: React.FC = () => {
         onSubmit={handleSubmit}
       >
         {(props) => (
-          <Form className="space-y-5 w-full">
+          <Form className="space-y-5 w-full max-w-lg">
             <Field name="id" className="space-y-5">
               {({ field, form }: FieldProps) => (
                 <FormControl
@@ -73,12 +88,13 @@ const FormAddress: React.FC = () => {
                     _focus={{ borderColor: 'dark', borderWidth: '1px' }}
                     className="rounded-none placeholder:text-gray-800 font-thin"
                   />
-                  <FormHelperText color="gray.400">
-                    Lembre-se que são necessários 4 dígitos
-                  </FormHelperText>
                   <FormErrorMessage>
                     {form.errors.id as string}
                   </FormErrorMessage>
+
+                  <FormHelperText color="gray.400" mt={2}>
+                    Lembre-se que são necessários 4 dígitos
+                  </FormHelperText>
                 </FormControl>
               )}
             </Field>

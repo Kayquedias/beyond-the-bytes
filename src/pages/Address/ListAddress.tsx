@@ -7,14 +7,13 @@ import {
   GridItem,
   Heading,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import PlanetKay from '../../assets/planet-amico.svg';
 import PlusIcon from '../../assets/plus.png';
-import { Link } from 'react-router-dom';
 
 type ListAddressProps = {
-  data: string[];
+  data: { id: string; image: string }[];
   setIsRegister: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -42,38 +41,40 @@ const ListAddress: React.FC<ListAddressProps> = ({ data, setIsRegister }) => {
         gap={2}
         rowGap={12}
       >
-        {data.map((item) => (
-          <Card
-            className="gap-5 relative"
-            rounded={0}
-            shadow={0}
-            w={'full'}
-            key={item}
-          >
-            <Box className="bg-card px-10 py-12">
-              <img src={PlanetKay} alt="" className="w-40 mx-auto" />
-            </Box>
+        {data.map((item) => {
+          return (
+            <Card
+              className="gap-5 relative"
+              rounded={0}
+              shadow={0}
+              w={'full'}
+              key={item.id}
+            >
+              <Box className="bg-card px-10 py-12">
+                <img src={item.image} alt="" className="w-40 mx-auto" />
+              </Box>
 
-            <Center className="flex flex-col gap-1.5">
-              <Heading
-                as={'h4'}
-                fontWeight={400}
-                fontFamily={'DINNeuzeitGrotesk LT'}
-                size={'sm'}
-                className="uppercase tracking-wider"
-              >
-                Endereço ID
-              </Heading>
+              <Center className="flex flex-col gap-1.5">
+                <Heading
+                  as={'h4'}
+                  fontWeight={400}
+                  fontFamily={'DINNeuzeitGrotesk LT'}
+                  size={'sm'}
+                  className="uppercase tracking-wider"
+                >
+                  Endereço ID
+                </Heading>
 
-              <span>#{item}</span>
-            </Center>
+                <span>#{item.id}</span>
+              </Center>
 
-            <motion.span></motion.span>
-          </Card>
-        ))}
+              <motion.span></motion.span>
+            </Card>
+          );
+        })}
 
         <Link to={'register'} onClick={() => setIsRegister(true)}>
-          <GridItem className="w-full min-h-40 h-[68.3%] bg-dark md:h-[74.2%] flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-dark/80">
+          <GridItem className="w-full min-h-40 h-[68.3%] bg-dark flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-dark/80 md:h-[74.2%] md:min-h-52 lg:min-h-64">
             <img src={PlusIcon} alt="" className="w-10" />
           </GridItem>
         </Link>

@@ -3,9 +3,11 @@ import { Outlet } from 'react-router-dom';
 import { Container } from '@chakra-ui/react';
 
 import { ListAddress } from './ListAddress';
+import { getFromLocalStorage } from '../../data/api';
 
 const AddressPage: React.FC = () => {
   const [isRegister, setIsRegister] = useState(false);
+  const data = getFromLocalStorage();
 
   return (
     <Container
@@ -15,9 +17,9 @@ const AddressPage: React.FC = () => {
       className="space-y-5"
     >
       {isRegister ? (
-        <Outlet />
+        <Outlet context={{ setIsRegister }} />
       ) : (
-        <ListAddress data={['1234', '4321']} setIsRegister={setIsRegister} />
+        <ListAddress data={data || []} setIsRegister={setIsRegister} />
       )}
     </Container>
   );
